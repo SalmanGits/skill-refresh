@@ -1,0 +1,33 @@
+name: Node Github Action YAML
+on:
+  push:
+    branches:
+     - main
+
+  pull_request:
+    branches:
+     - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+
+        with:
+         node-version: 22.x
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build App
+        run: npm run build
+
+      - name: Run Server
+        run: node dist/index.js
+
