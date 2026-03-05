@@ -1,4 +1,4 @@
-FROM node:19-bullseye
+FROM node:18-slim
 
 RUN mkdir app
 
@@ -6,9 +6,13 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm i pnpm -g
+
+RUN pnpm install
 
 COPY . .
+
+RUN pnpm build
 
 EXPOSE 3000
 
